@@ -9,6 +9,7 @@ tiny osint tool for the terminal. built for speed and clean looks.
 
     ip tracker: fast ip lookup with maps.
 
+    metadata: extracts metadata from image file
 
 clean, fast, and simple. 🥜🚀
     
