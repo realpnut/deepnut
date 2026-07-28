@@ -1,38 +1,67 @@
 import requests
 from rich.console import Console
+from rich.panel import Panel
 
 console = Console()
 
+
 def iplookup():
+    legal_info = """
+[bold cyan]Deepnut IP Intelligence Module[/bold cyan]
+
+This module uses [bold white]ip-api.com[/bold white]
+to retrieve public IP information.
+
+Data provided may include:
+- Location information
+- ISP details
+- Coordinates
+
+Use only for authorized research and analysis.
+    """
+
+    console.print(Panel(legal_info, border_style="cyan"))
+
     console.print("\n[bold cyan]─── IP TRACKER ───[/bold cyan]\n")
-    
-    lIP = console.input("[bold white] Enter IP Address: [/bold white]")
+
+    lIP = console.input("[bold white] Enter IP Address: [/bold white] ")
+
     url = f"http://ip-api.com/json/{lIP}"
-    
+
     try:
         data = requests.get(url, timeout=10).json()
 
         if data.get("status") == "fail":
-            console.print(f"[bold red]![/bold red] Error: {data.get('message')}")
+            console.print(
+                f"[bold red]![/bold red] Error: {data.get('message')}"
+            )
+
         else:
-            lat = data.get('lat')
-            lon = data.get('lon')
-            
+            lat = data.get("lat")
+            lon = data.get("lon")
+
             res = {
-                "Target IP": data.get('query'),
+                "Target IP": data.get("query"),
                 "Location ": f"{data.get('city')}, {data.get('country')} ({data.get('countryCode')})",
-                "ISP      ": data.get('isp'),
+                "ISP      ": data.get("isp"),
                 "GPS      ": f"{lat}, {lon}",
                 "Maps     ": f"https://www.google.com/maps?q={lat},{lon}"
             }
 
             for key, value in res.items():
-                console.print(f"[bold cyan]{key}[/bold cyan] [white]❯[/white] [bold white]{value}[/bold white]")
+                console.print(
+                    f"[bold cyan]{key}[/bold cyan] "
+                    f"[white]❯[/white] "
+                    f"[bold white]{value}[/bold white]"
+                )
 
     except Exception as e:
-        console.print(f"[bold red]![/bold red] Connection error: {e}")
+        console.print(
+            f"[bold red]![/bold red] Connection error: {e}"
+        )
 
     console.input("\n[cyan]❯[/cyan] Press Enter to return...")
+
 
 if __name__ == "__main__":
     iplookup()
