@@ -1,3 +1,4 @@
+#this is deepnut v0.2
 import time
 import os
 from rich.console import Console
