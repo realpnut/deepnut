@@ -14,6 +14,7 @@ def print_gradient_menu():
         "║                                       ║",
         "║  1. User Search (Sherlock)            ║",
         "║  2. IP Tracker (IP-API)               ║",
+        "║  3. Metadata extractor                ║",
         "║                                       ║",
         "║  0. Exit                              ║",
         "║                                       ║",
@@ -36,6 +37,8 @@ while True:
         os.system("python3 mods/sherlock.py")
     elif menu == "2":
         os.system("python3 mods/iplookup.py")
+    elif menu == "3":
+        os.system("python3 mods/metadata.py")
     elif menu == "0":
         console.print("[bold red]Exiting...[/bold red]")
         break
